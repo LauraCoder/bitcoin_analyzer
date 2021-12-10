@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dateInput {
+  display: inline-block !important;
+}
+
+.infoTable td {
+  padding: 5px 20px;
+}
+
+.infoTable tr:nth-child(even) {
+  background: #dde9eb;
+}
+
+.infoTable tr:nth-child(odd) {
+  background: #ebf1f2;
+}
