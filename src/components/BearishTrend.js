@@ -1,6 +1,10 @@
 import React from 'react'
 
-const BearishTrend = ({ dailyPrice }) => {
+const BearishTrend = ({ dailyPrice, show }) => {
+  if (!show) {
+    return null
+  }
+
   const priceArray = dailyPrice().map(p => p[1])
   let trendArray = []
   let trendLength = 0
@@ -16,27 +20,19 @@ const BearishTrend = ({ dailyPrice }) => {
     }
   }
   
-  const bearishTrend = Math.max(...trendArray)
+  let bearishTrend = Math.max(...trendArray) + ' days'
   
   if (!trendArray.length) {
-    return ('Prices did not decrease during the period.')
+    bearishTrend = ('Prices did not decrease during the period.')
   }
   
   return (
-    <>
-      <table className='infoTable'>
-        <thead>
-          <tr>
-            <th>The Longest Bearish Trend</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{bearishTrend} days</td>
-          </tr>
-        </tbody>
-      </table>
-    </>
+    <div className='row'>
+      <div className='column'>
+        <h2>The Longest Bearish Trend</h2>
+        <h3>{bearishTrend}</h3>
+      </div>
+    </div>
   )
 }
 

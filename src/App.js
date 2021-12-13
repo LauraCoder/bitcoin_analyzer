@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import DateInput from './components/DateInput'
-import BearishTrend from './components/BearishTrend'
-import TradingVolume from './components/TradingVolume'
 
 const App = () => {
   const [ cryptoInfo, setCryptoInfo ] = useState([])
   const [ startDate, setStartDate ] = useState(null)
   const [ endDate, setEndDate ] = useState(null)
-  const [ show, setShow ] = useState(false)
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -29,6 +26,7 @@ const App = () => {
         toDate= endDate.getTime() / 1000 + 3600 //3600 = 1h
       }
     
+    console.log('effect')
     const baseUrl = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range'
     axios
       .get(`${baseUrl}?vs_currency=eur&from=${fromDate}&to=${toDate}`)
@@ -37,6 +35,7 @@ const App = () => {
         setCryptoInfo(response.data)
       })
     }
+    
   }, [endDate, startDate])
 
   const dailyPrice = () => {
@@ -55,28 +54,26 @@ const App = () => {
     let newArr = [priceArray[0]]
     const filteredArray = priceArray.slice(1).filter((e, i=1) => i % 24 === 24 - 1);
     newArr.push(...filteredArray)
-
+     
     return newArr
   }
 
   return (
-    <>
-      <h1>Bitcoin Analyzer</h1>
+    <div className='container'>
+      <div className='row'>
+        <div className='column'>
+          <h1>Bitcoin Analyzer</h1>
+        </div>
+      </div>
       <DateInput
-        startDate={startDate} 
-        setStartDate={setStartDate}
-        endDate={endDate}
-        setEndDate={setEndDate}
-        show={show}
-        setShow={setShow} 
+          startDate={startDate} 
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+          dailyPrice={dailyPrice}
+          cryptoInfo={cryptoInfo}
       />
-      {show &&
-        <>
-          <BearishTrend dailyPrice={dailyPrice} />
-          <TradingVolume cryptoInfo={cryptoInfo} />
-        </>
-      }
-    </>
+    </div>
   )
 }
 

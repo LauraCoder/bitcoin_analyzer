@@ -1,29 +1,106 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 body {
   margin: 0;
+  background-color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.dateInput {
-  display: inline-block !important;
+.row {
+  margin: 10px 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
 }
-
-.infoTable td {
-  padding: 5px 20px;
+.column {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
-
-.infoTable tr:nth-child(even) {
-  background: #dde9eb;
+.react-datepicker__input-container input {
+  padding: 5px;
 }
-
-.infoTable tr:nth-child(odd) {
+form.dateForm {
+  margin: 25px 0px;
+}
+.form-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-row label {
+  padding: 10px 0px;
+  width: 120px;
+}
+.form-row button {
+ background: #1c98ad;
+ color: #fff;
+ margin: 10px;
+ padding: 10px;
+ border: 0;
+ border-radius: 8px;
+}
+.form-row button:hover {
+  background-color: #52abba;
+  color: #fff;
+  border: 0;
+ }
+.dataButton {
+  background-color: #a4a6a6;
+  color: #fff;
+  padding: 6px;
+  margin: 5px;
+  border: 0;
+  border-radius: 4px;
+}
+.dataButton:hover {
+  background-color: #b9bdbd;
+  color: #fff;
+  border: 0;
+}
+.dataTable th {
+  background-color: #dde9eb;
+}
+.dataTable th, td {
+  padding: 7px 30px;
+}
+.dataTable td {
   background: #ebf1f2;
+}
+ul.nav {
+  background-color: #fff;
+  width: 50%;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+ul.nav li {
+  background-color: #d2ebf0;
+  width: 50%;
+  padding: 15px;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.7s;
+  border: 1px;
+}
+ul.nav li:hover, ul.nav li.active {
+  background: #52abba;
+  color: #fff;
 }
