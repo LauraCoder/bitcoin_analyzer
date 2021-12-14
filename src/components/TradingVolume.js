@@ -13,25 +13,23 @@ const TradingVolume = ({ cryptoInfo, show }) => {
   maxVolume = maxVolume.toFixed(2)
 
   return (
-    <div className='row'>
-      <div className='column'>
-        <h2>The Highest Trading Volume</h2>
-        <table className='dataTable'>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Volume (€)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{date}</td>
-              <td>{maxVolume} €</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <>
+      <h2>The Highest Trading Volume</h2>
+      <table className='dataTable'>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Volume (€)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{date}</td>
+            <td>{maxVolume} €</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
   )
 }
 

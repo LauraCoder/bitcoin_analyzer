@@ -1,10 +1,10 @@
 import React from 'react'
 
 const Notification = ({ message }) => {
-  return message
-    ? <div style={{color: 'red'}}>
-      {message}
-      </div>
+  return message ?
+    <div className='notification'>
+      <h4>{message}</h4>
+    </div>
     : null
 }
 
