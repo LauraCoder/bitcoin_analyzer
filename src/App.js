@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import './App.css'
 
 import DateForm from './components/DateForm'
 import Notification from './components/Notification'
 import BearishTrend from './components/BearishTrend'
 import TradingVolume from './components/TradingVolume'
-import InvestingAnalyzer from './components/InvestingAnalyzer'
+import InvestmentAnalyzer from './components/InvestmentAnalyzer'
 
 const App = () => {
   const [ cryptoInfo, setCryptoInfo ] = useState([])
@@ -16,21 +17,22 @@ const App = () => {
   const [ page, setPage ] = useState('')
 
   useEffect(() => {
-    if (startDate && endDate) {
+    if ( startDate && endDate ) {
       const startDateUnixTime = startDate.getTime() / 1000
       const endDateUnixTime = endDate.getTime() / 1000
-      const over90Days = endDateUnixTime - startDateUnixTime > 7776000
+      const diffStartDateEndDate = endDateUnixTime - startDateUnixTime
+      const ninetyDays = 7776000
       const fromDate = startDate.getTime() / 1000
+      const oneDay = 86400
+      const oneHour = 3600
       let toDate
 
-      //if the chosen time range is longer than 90 days, 1 day will be added to ensure data from the last day
       //"Above 90 days from query time = daily data (00:00 UTC)"
-      //if the chosen range is =< 90 days, 1h will be added
       //"1 - 90 days from query time = hourly data"
-      if(over90Days) {
-        toDate = endDate.getTime() / 1000 + 86400 //86400 = 1d
+      if( diffStartDateEndDate > ninetyDays ) {
+        toDate = endDate.getTime() / 1000 + oneDay
       } else {
-        toDate= endDate.getTime() / 1000 + 3600 //3600 = 1h
+        toDate= endDate.getTime() / 1000 + oneHour
       }
 
       console.log('effect')
@@ -41,24 +43,26 @@ const App = () => {
           console.log('promise fulfilled')
           setCryptoInfo(response.data)
         })
+    } else {
+      return setCryptoInfo([])
     }
   }, [endDate, startDate])
 
   const dailyPrice = () => {
-    const priceArray = cryptoInfo.prices
+    const dailyPriceArray = cryptoInfo.prices
     const startDateUnixTime = startDate.getTime() / 1000
     const endDateUnixTime = endDate.getTime() / 1000
-    const over90Days = endDateUnixTime - startDateUnixTime > 7776000
+    const diffStartDateEndDate = endDateUnixTime - startDateUnixTime
+    const ninetyDays = 7776000
 
-    //Above 90 days from query time = daily data (00:00 UTC). 776000 = 1 day
-    if(over90Days) {
-      return priceArray
+    //Above 90 days from query time = daily data (00:00 UTC)
+    if( diffStartDateEndDate > ninetyDays ) {
+      return dailyPriceArray
     }
 
     //1 - 90 days from query time = hourly data
-    //For daily price need to get every 24th value from the array
-    let newArr = [priceArray[0]]
-    const filteredArray = priceArray.slice(1).filter((e, i=1) => i % 24 === 24 - 1)
+    let newArr = [dailyPriceArray[0]]
+    const filteredArray = dailyPriceArray.slice(1).filter((e, i=1) => i % 24 === 24 - 1)
     newArr.push(...filteredArray)
 
     return newArr
@@ -66,7 +70,7 @@ const App = () => {
 
   const handleBearishTrend = () => setPage('bearishTrend')
   const handleTradingVolume = () => setPage('tradingVolume')
-  const handleAnalyzer = () => setPage('investingAnalyzer')
+  const handleAnalyzer = () => setPage('investmentAnalyzer')
 
   return (
     <div className='container'>
@@ -99,7 +103,7 @@ const App = () => {
             <li className={page === 'tradingVolume' ? 'active' : ''} onClick={handleTradingVolume}>
               Trading Volume
             </li>
-            <li className={page === 'investingAnalyzer' ? 'active' : ''} onClick={handleAnalyzer}>
+            <li className={page === 'investmentAnalyzer' ? 'active' : ''} onClick={handleAnalyzer}>
               Investing Analyzer
             </li>
           </ul>
@@ -107,7 +111,7 @@ const App = () => {
             <div className='column'>
               <BearishTrend show={page === 'bearishTrend'} dailyPrice={dailyPrice} />
               <TradingVolume show={page === 'tradingVolume'} cryptoInfo={cryptoInfo} />
-              <InvestingAnalyzer show={page === 'investingAnalyzer'} dailyPrice={dailyPrice} />
+              <InvestmentAnalyzer show={page === 'investmentAnalyzer'} dailyPrice={dailyPrice} />
             </div>
           </div>
         </div>

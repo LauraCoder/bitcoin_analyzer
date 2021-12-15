@@ -1,0 +1,29 @@
+.react-datepicker__input-container input {
+  padding: 5px;
+}
+form.dateForm {
+  margin: 20px 0px;
+}
+.form-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-row label {
+  padding: 10px 0px;
+  width: 120px;
+}
+.form-row .btn {
+  background-color: #00A19D;
+  color: #fff;
+  width: 110px;
+  margin: 15px;
+  padding: 11px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.form-row .btn:hover {
+  background-color: #007470;
+  transition: .5s ease;
+}

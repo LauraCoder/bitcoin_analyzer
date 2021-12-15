@@ -16,6 +16,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+h1, h2 {
+  color: #00A19D;
+}
 .container {
   position: relative;
   background-color: #fff;
@@ -39,111 +42,11 @@ code {
   flex-direction: column;
   padding: 10px 0;
 }
-.dataColumn{
-  margin: auto;
-  padding: 0px 0px 30px 0px;
-  width: 100%;
-  height: 100%;
-}
-.react-datepicker__input-container input {
-  padding: 5px;
-}
-form.dateForm {
-  margin: 20px 0px;
-}
-.form-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.form-row label {
-  padding: 10px 0px;
-  width: 120px;
-}
-.form-row .btn {
- background-color: #00A19D;
- color: #fff;
- width: 110px;
- margin: 15px;
- padding: 11px;
- border: 0;
- border-radius: 8px;
- cursor: pointer;
-}
-.form-row .btn:hover {
-  background-color: #007470;
-  transition: .5s ease;
- }
-.dataTable {
-  margin-top: 40px;
-}
-.dataTable th {
-  background-color: #55CAC6;
-  color: #fff;
-}
-.dataTable th, td {
-  padding: 7px 30px;
-}
-.dataTable td {
-  background: #def7f6;
-}
-ul.nav {
-  background-color: #fff;
-  width: 100%;
-  margin: 0 auto 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-ul.nav li {
-  background-color: #55CAC6;
-  color: #fff;
-  width: 100%;
-  padding: 15px;
-  list-style: none;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.7s;
-  border: 1px;
-}
-ul.nav li:hover, ul.nav li.active {
-  background: #00a3a0;
-  color: #fff;
-}
-.notification {
-  width: 100%;
-  box-shadow: 0 2px 8px 0 #1a273d40;
-  border: 0;
-  background-color: rgb(255, 146, 59, .9);
-  color: #fff;
-  position: fixed;
-  overflow: hidden;
-  z-index: 2400;
-  padding: 30px;
-  top: 0;
-  left: 0;
-}
-.colored-div {
-  display: block;
-  margin: 45px auto 0;
-  padding: 30px;
-  min-width: 120px;
-  height: auto;
-  text-align: center;
-  background-color: #55CAC6;
-  color: #fff;
-  border-radius: 8px;
-}
-h1, h2 {
-  color: #00A19D;
-}
-
 @media (max-width: 768px) {
-  .container {
-    width: 90%;
+  h2 {
+    font-size: 20px;
   }
-  .dataColumn{
-    padding: 0px 0px 20px 0px;
-    width: 100%;
+  .container {
+    width: 95%;
   }
 }

@@ -1,18 +1,11 @@
-import React, { useCallback } from 'react'
+import React from 'react'
+import './../dateForm.css'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 const DateForm = ({ show, setShow, setPage, startDate, setStartDate, endDate, setEndDate, setMessage }) => {
-  //const handleStartDateChange = (date) => setStartDate(new Date(date))
-  //const handleEndDateChange = (date) => setEndDate(new Date(date))
-
-  const handleStartDateChange = useCallback(date => {
-    setStartDate(new Date(date))
-  }, [setStartDate])
-
-  const handleEndDateChange = useCallback(date => {
-    setEndDate(new Date(date))
-  }, [setEndDate])
+  const handleStartDateChange = (date) => setStartDate(new Date(date))
+  const handleEndDateChange = (date) => setEndDate(new Date(date))
 
   const submitDates = (e) => {
     e.preventDefault()
@@ -31,9 +24,9 @@ const DateForm = ({ show, setShow, setPage, startDate, setStartDate, endDate, se
     <>
       <form onSubmit={submitDates} className='dateForm'>
         <div className='form-row'>
-          <label htmlFor='startDate'>Start Date</label>
+          <label htmlFor='startDatePicker'>Start Date</label>
           <DatePicker
-            id='startDate'
+            id='startDatePicker'
             placeholderText='Select Start Date'
             selected={startDate}
             onChange={handleStartDateChange}
@@ -44,9 +37,9 @@ const DateForm = ({ show, setShow, setPage, startDate, setStartDate, endDate, se
           />
         </div>
         <div className='form-row'>
-          <label htmlFor='endDate'>End Date</label>
+          <label htmlFor='endDatePicker'>End Date</label>
           <DatePicker
-            id='endDate'
+            id='endDatePicker'
             placeholderText='Select End Date'
             selected={endDate}
             onChange={handleEndDateChange}
@@ -65,6 +58,5 @@ const DateForm = ({ show, setShow, setPage, startDate, setStartDate, endDate, se
     </>
   )
 }
-
 
 export default DateForm
