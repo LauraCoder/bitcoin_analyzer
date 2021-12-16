@@ -64,7 +64,7 @@ const App = () => {
 
     //1 - 90 days from query time = hourly data
     let newArr = [dailyPriceArray[0]]
-    const filteredArray = dailyPriceArray.slice(1).filter((e, i=1) => i % 24 === 24 - 1)
+    const filteredArray = dailyPriceArray.slice(1).filter((i=1) => i % 24 === 24 - 1)
     newArr.push(...filteredArray)
 
     return newArr
