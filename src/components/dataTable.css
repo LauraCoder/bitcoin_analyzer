@@ -29,4 +29,7 @@
   .dataTable th, td {
     padding: 6px 20px;
   }
+  .coloredDiv {
+    max-width: 90%;
+  }
 }
