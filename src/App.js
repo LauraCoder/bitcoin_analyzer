@@ -55,22 +55,26 @@ const App = () => {
         })
     }
     setIsLoading(false)
-  }, [endDate, startDate])
+  }, [startDate, endDate])
 
   const dailyPrice = () => {
-    const dailyPriceArray = cryptoInfo.prices
+    if ( cryptoInfo ) {
+      const dailyPriceArray = cryptoInfo.prices
 
-    //Above 90 days from query time = daily data (00:00 UTC)
-    if( diffStartDateEndDate > ninetyDaysUnix ) {
-      return (dailyPriceArray)
+      //Above 90 days from query time = daily data (00:00 UTC)
+      if( diffStartDateEndDate > ninetyDaysUnix ) {
+        return (dailyPriceArray)
+      }
+
+      //1 - 90 days from query time = hourly data
+      let newArr = []
+      newArr.push(dailyPriceArray[0])
+      const filteredArray = dailyPriceArray.slice(1).filter((_e, i=1) => i % 24 === 24 - 1)
+      newArr.push(...filteredArray)
+      console.log('dailyprice 2', newArr)
+
+      return newArr
     }
-
-    //1 - 90 days from query time = hourly data
-    let newArr = [dailyPriceArray[0]]
-    const filteredArray = dailyPriceArray.slice(1).filter((_e, i=1) => i % 24 === 24 - 1)
-    newArr.push(...filteredArray)
-
-    return newArr
   }
 
   return (
@@ -99,7 +103,7 @@ const App = () => {
               />
             </div>
           </div>
-          {show && cryptoInfo &&
+          {show &&
             <div className='dataColumn'>
               <Navbar
                 page={page}

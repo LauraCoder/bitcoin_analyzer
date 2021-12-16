@@ -50,7 +50,7 @@ const DataTable = ({ getMinDate, getMaxDate, roundedMinPrice, roundedMaxPrice, m
 }
 
 const InvestmentAnalyzer = ({ dailyPrice, show }) => {
-  if (!show) {
+  if (!show || !dailyPrice) {
     return null
   }
   const dailyPriceArray = dailyPrice()

@@ -29,7 +29,7 @@ const DataTable = ({ volumeDate, maxVolume }) => {
 }
 
 const TradingVolume = ({ cryptoInfo, show }) => {
-  if (!show) {
+  if (!show || !cryptoInfo) {
     return null
   }
 

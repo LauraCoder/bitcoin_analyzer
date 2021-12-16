@@ -2,7 +2,7 @@ import React from 'react'
 import './dataTable.css'
 
 const BearishTrend = ({ dailyPrice, show }) => {
-  if (!show) {
+  if (!show || !dailyPrice) {
     return null
   }
 
