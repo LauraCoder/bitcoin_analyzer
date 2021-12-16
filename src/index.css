@@ -42,11 +42,20 @@ h1, h2 {
   flex-direction: column;
   padding: 10px 0;
 }
+.dataColumn{
+  margin: auto;
+  padding-bottom: 30px;
+  width: 100%;
+}
 @media (max-width: 768px) {
   h2 {
     font-size: 20px;
   }
   .container {
     width: 95%;
+  }
+  .dataColumn{
+    padding: 0px 0px 20px 0px;
+    width: 100%;
   }
 }

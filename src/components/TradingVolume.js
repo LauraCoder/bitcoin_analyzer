@@ -1,5 +1,32 @@
 import React from 'react'
-import './../dataTable.css'
+import './dataTable.css'
+
+const DataTable = ({ volumeDate, maxVolume }) => {
+  return (
+    <table className='dataTable'>
+      <thead>
+        <tr>
+          <th>
+            Date
+          </th>
+          <th>
+            Volume
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            {volumeDate}
+          </td>
+          <td>
+            {maxVolume} €
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  )
+}
 
 const TradingVolume = ({ cryptoInfo, show }) => {
   if (!show) {
@@ -16,28 +43,10 @@ const TradingVolume = ({ cryptoInfo, show }) => {
   return (
     <>
       <h2>The Highest Trading Volume</h2>
-      <table className='dataTable'>
-        <thead>
-          <tr>
-            <th>
-              Date
-            </th>
-            <th>
-              Volume
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              {volumeDate}
-            </td>
-            <td>
-              {maxVolume} €
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <DataTable
+        volumeDate={volumeDate}
+        maxVolume={maxVolume}
+      />
     </>
   )
 }

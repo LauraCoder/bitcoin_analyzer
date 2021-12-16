@@ -15,11 +15,14 @@ const messageStyle = {
 }
 
 const Notification = ({ message }) => {
-  return message ?
+  if (!message) {
+    return null
+  }
+  return (
     <div style={messageStyle}>
       <h4>{message}</h4>
     </div>
-    : null
+  )
 }
 
 export default Notification

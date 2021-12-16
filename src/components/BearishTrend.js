@@ -1,15 +1,5 @@
 import React from 'react'
-
-const coloredDiv = {
-  margin: '45px auto 0',
-  padding: '25px',
-  height: 'auto',
-  width: 'auto',
-  textAlign: 'center',
-  backgroundColor: '#54c4c0',
-  color: '#fff',
-  borderRadius: '8px',
-}
+import './dataTable.css'
 
 const BearishTrend = ({ dailyPrice, show }) => {
   if (!show) {
@@ -23,14 +13,11 @@ const BearishTrend = ({ dailyPrice, show }) => {
   for (let i = 0; i < pricesOnly.length; i++) {
     if(pricesOnly[i] > pricesOnly[i+1]) {
       trendLength++
-    } else if(pricesOnly[i] <= pricesOnly[i+1]) {
-      if (trendLength > 0){
-        trendArray.push(trendLength)
-      }
+    } else if(pricesOnly[i] <= pricesOnly[i+1] && trendLength > 0) {
+      trendArray.push(trendLength)
       trendLength = 0
     }
   }
-
   let bearishTrend = Math.max(...trendArray)
   let daysText = 'days'
 
@@ -44,7 +31,7 @@ const BearishTrend = ({ dailyPrice, show }) => {
   return (
     <>
       <h2>The Longest Bearish Trend</h2>
-      <div style={coloredDiv}>
+      <div className='coloredDiv'>
         <h4>{bearishTrend} {daysText}</h4>
       </div>
     </>

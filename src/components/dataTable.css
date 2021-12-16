@@ -12,6 +12,16 @@
 .dataTable td {
   background: #def7f6;
 }
+.coloredDiv {
+  margin: 45px auto 0;
+  padding: 25px;
+  height: auto;
+  width: auto;
+  text-align: center;
+  background-color: #54c4c0;
+  color: #fff;
+  border-radius: 8px;
+}
 @media (max-width: 768px) {
   .dataTable{
     font-size: 13px;

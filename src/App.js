@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import './App.css'
 
+import dataService from './services/bitcoinData'
 import DateForm from './components/DateForm'
 import Notification from './components/Notification'
 import BearishTrend from './components/BearishTrend'
 import TradingVolume from './components/TradingVolume'
 import InvestmentAnalyzer from './components/InvestmentAnalyzer'
+import Navbar from './components/Navbar'
 
 const App = () => {
   const [ cryptoInfo, setCryptoInfo ] = useState([])
@@ -16,47 +16,49 @@ const App = () => {
   const [ show, setShow ] = useState(false)
   const [ page, setPage ] = useState('')
 
+  const ninetyDaysUnix = 7776000
+  const oneDayUnix = 86400
+  const oneHourUnix = 3600
+  let endDateUnixTime, toDate, fromDate, diffStartDateEndDate
+
+  if ( startDate && endDate ) {
+    endDateUnixTime = endDate.getTime() / 1000
+    fromDate = startDate.getTime() / 1000
+    diffStartDateEndDate = endDateUnixTime - fromDate
+  }
+
   useEffect(() => {
     if ( startDate && endDate ) {
-      const startDateUnixTime = startDate.getTime() / 1000
-      const endDateUnixTime = endDate.getTime() / 1000
-      const diffStartDateEndDate = endDateUnixTime - startDateUnixTime
-      const ninetyDays = 7776000
-      const fromDate = startDate.getTime() / 1000
-      const oneDay = 86400
-      const oneHour = 3600
-      let toDate
-
       //"Above 90 days from query time = daily data (00:00 UTC)"
       //"1 - 90 days from query time = hourly data"
-      if( diffStartDateEndDate > ninetyDays ) {
-        toDate = endDate.getTime() / 1000 + oneDay
+      if( diffStartDateEndDate > ninetyDaysUnix ) {
+        toDate = endDate.getTime() / 1000 + oneDayUnix
       } else {
-        toDate= endDate.getTime() / 1000 + oneHour
+        toDate= endDate.getTime() / 1000 + oneHourUnix
       }
 
-      console.log('effect')
-      const baseUrl = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range'
-      axios
-        .get(`${baseUrl}?vs_currency=eur&from=${fromDate}&to=${toDate}`)
-        .then(response => {
-          console.log('promise fulfilled')
-          setCryptoInfo(response.data)
+      dataService
+        .getAll(fromDate, toDate)
+        .then(initialData => {
+          setCryptoInfo(initialData)
         })
-    } else {
-      return setCryptoInfo([])
+        // eslint-disable-next-line no-unused-vars
+        .catch(error => {
+          setMessage(
+            'Something went wrong'
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 3000)
+        })
     }
   }, [endDate, startDate])
 
   const dailyPrice = () => {
     const dailyPriceArray = cryptoInfo.prices
-    const startDateUnixTime = startDate.getTime() / 1000
-    const endDateUnixTime = endDate.getTime() / 1000
-    const diffStartDateEndDate = endDateUnixTime - startDateUnixTime
-    const ninetyDays = 7776000
 
     //Above 90 days from query time = daily data (00:00 UTC)
-    if( diffStartDateEndDate > ninetyDays ) {
+    if( diffStartDateEndDate > ninetyDaysUnix ) {
       return dailyPriceArray
     }
 
@@ -67,10 +69,6 @@ const App = () => {
 
     return newArr
   }
-
-  const handleBearishTrend = () => setPage('bearishTrend')
-  const handleTradingVolume = () => setPage('tradingVolume')
-  const handleAnalyzer = () => setPage('investmentAnalyzer')
 
   return (
     <div className='container'>
@@ -96,22 +94,24 @@ const App = () => {
       </div>
       {show &&
         <div className='dataColumn'>
-          <ul className='nav'>
-            <li className={page === 'bearishTrend' ? 'active' : ''} onClick={handleBearishTrend}>
-              Bearish Trend
-            </li>
-            <li className={page === 'tradingVolume' ? 'active' : ''} onClick={handleTradingVolume}>
-              Trading Volume
-            </li>
-            <li className={page === 'investmentAnalyzer' ? 'active' : ''} onClick={handleAnalyzer}>
-              Investing Analyzer
-            </li>
-          </ul>
+          <Navbar
+            page={page}
+            setPage={setPage}
+          />
           <div className='row'>
             <div className='column'>
-              <BearishTrend show={page === 'bearishTrend'} dailyPrice={dailyPrice} />
-              <TradingVolume show={page === 'tradingVolume'} cryptoInfo={cryptoInfo} />
-              <InvestmentAnalyzer show={page === 'investmentAnalyzer'} dailyPrice={dailyPrice} />
+              <BearishTrend
+                show={page === 'bearishTrend'}
+                dailyPrice={dailyPrice}
+              />
+              <TradingVolume
+                show={page === 'tradingVolume'}
+                cryptoInfo={cryptoInfo}
+              />
+              <InvestmentAnalyzer
+                show={page === 'investmentAnalyzer'}
+                dailyPrice={dailyPrice}
+              />
             </div>
           </div>
         </div>
