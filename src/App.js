@@ -58,7 +58,7 @@ const App = () => {
   }, [startDate, endDate])
 
   const dailyPrice = () => {
-    if ( cryptoInfo ) {
+    if ( !cryptoInfo.length ) {
       const dailyPriceArray = cryptoInfo.prices
 
       //Above 90 days from query time = daily data (00:00 UTC)
