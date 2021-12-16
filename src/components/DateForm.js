@@ -33,6 +33,7 @@ const DateForm = ({ show, setShow, setPage, startDate, setStartDate, endDate, se
             selectsStart
             startDate={startDate}
             endDate={endDate}
+            maxDate={new Date()}
             dateFormat='dd/MM/yyyy'
           />
         </div>
