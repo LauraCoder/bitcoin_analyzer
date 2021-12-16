@@ -99,7 +99,7 @@ const App = () => {
               />
             </div>
           </div>
-          {show &&
+          {show && cryptoInfo &&
             <div className='dataColumn'>
               <Navbar
                 page={page}
