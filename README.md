@@ -46,4 +46,4 @@
  
  <h2>Future possibilities & What to improve</h2>
  <p>In the creation I focused on readable code, to which it would be easy to add more features in the future.</p>
- <p>The app works mainly smoothly and without any problems on desktop, tablet and mobile. However, occasionally fetching data throws an error which I haven't managed to fix yet. Therefore it is definitely something that still has to be worked with.</p>
+ <p>The app works mainly smoothly and without any problems on desktop, tablet and mobile. However, occasionally fetching data throws an error which I haven't managed to fix yet. Even though refreshing browser normally fixes the situation, it is definitely something that still has to be worked with.</p>
