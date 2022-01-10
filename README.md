@@ -1,6 +1,6 @@
 <h1>Bitcoin Analyzer</h1>
 
-<p>Bitcoin Analyzer is a simple React web app project to help to analyze the market value of bitcoin. It is created as a pre-assignment for the Rising Star programme of <a href="https://www.vincit.fi" target="_blank">Vincit</a>, and not to forget, to help Scrooge McDuck with investing. :detective:</p>
+<p>Bitcoin Analyzer is a simple React web app project to help to analyze the market value of bitcoin.</p>
 <p>For now, the app has three features:
   <ul>
     <li>
